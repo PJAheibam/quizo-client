@@ -7,14 +7,19 @@ import Default from "./layouts/Default";
 import Quiz from "./components/quiz/Quiz";
 import Statistics from "./components/statistics/Statistics";
 import Blog from "./components/blog/Blog";
+import Topics from "./components/topics/Topics";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Default />,
-      loader: getTopics,
       children: [
+        {
+          path: "",
+          element: <Topics />,
+          loader: getTopics,
+        },
         {
           path: "quiz/:id",
           element: <Quiz />,
