@@ -40,7 +40,12 @@ export const Links = styled.nav`
   overflow: hidden;
   transition: max-height 750ms ease-out;
   @media ${device.md} {
+    position: relative;
+    max-height: 500px;
     flex-direction: row;
+    justify-content: flex-end;
+    background-color: transparent;
+    width: 50%;
   }
 `;
 
@@ -55,9 +60,15 @@ export const Link = styled(NavLink)`
   transition: color 300ms ease;
   &:first-child {
     margin-top: 1rem;
+    @media ${device.md} {
+      margin: 0;
+    }
   }
   &:last-child {
     margin-bottom: 1rem;
+    @media ${device.md} {
+      margin: 0;
+    }
   }
   &:hover {
     color: ${(p) =>

@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <LogoContainer>Site name</LogoContainer>
+      <LogoContainer to="/">Site name</LogoContainer>
       <ToggleButton onClick={() => setOpen((prev) => !prev)} open={open}>
         {open ? <CloseIcon /> : <HamburgerIcon />}
       </ToggleButton>

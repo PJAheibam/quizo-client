@@ -13,7 +13,7 @@ function App() {
     {
       path: "/",
       element: <Default />,
-      // loader: getTopics,
+      loader: getTopics,
       children: [
         {
           path: "quiz/:id",

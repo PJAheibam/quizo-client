@@ -11,6 +11,10 @@ export default createGlobalStyle`
     :root{
         color-scheme: dark;
     }
+    body{
+        font-family: "Outfit", sans-serif;
+        font-size: 1.15rem;
+    }
     /* .active{
         color: black
     } */
