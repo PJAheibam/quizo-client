@@ -2,14 +2,14 @@ import "./App.css";
 import { ThemeProvider } from "styled-components";
 import { dark } from "./styles/Theme";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/home/Home";
 import { getTopics } from "./utils/quizDataFetcher";
+import Default from "./layouts/Default";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Default />,
       loader: getTopics,
     },
   ]);
