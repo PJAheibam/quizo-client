@@ -5,7 +5,7 @@ import GlobalStyles from "../styles/GlobalStyles";
 
 const Default = () => {
   const res = useLoaderData();
-  console.info(res);
+  console.log(res);
   return (
     <>
       <GlobalStyles />

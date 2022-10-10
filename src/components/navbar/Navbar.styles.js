@@ -46,12 +46,11 @@ export const Links = styled.nav`
 
 export const Link = styled(NavLink)`
   text-transform: uppercase;
-  color: ${(p) => {
-    return p.style
-      ? (isActive) =>
-          isActive ? p.theme.palette.secondary.active : p.theme.text.secondary
-      : p.theme.text.secondary;
-  }};
+  /* color: ${(p) => p.theme.text.secondary}; */
+  /* color: ${(p) =>
+    p.style ? (isActive) => (isActive ? "Green" : "red") : "white"}; */
+  color: ${(p) =>
+    p.style ? p.theme.palette.secondary.active : p.theme.text.secondary};
   cursor: pointer;
   text-decoration: none;
   font-size: 1.25rem;
@@ -62,6 +61,9 @@ export const Link = styled(NavLink)`
   &:last-child {
     margin-bottom: 1rem;
   }
+  /* &[area-current] {
+    color: red;
+  } */
   &:hover {
     color: ${(p) => p.theme.text.hovered};
   }

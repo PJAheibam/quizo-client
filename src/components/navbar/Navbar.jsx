@@ -23,7 +23,9 @@ const Navbar = () => {
         {open ? <CloseIcon /> : <HamburgerIcon />}
       </ToggleButton>
       <Links open={open}>
-        <Link to="/">Topics</Link>
+        <Link to="" style={({ isActive }) => (isActive ? true : false)}>
+          Topics
+        </Link>
         <Link to="/statistics">Statistics</Link>
         <Link to="/blog">Blog</Link>
       </Links>
