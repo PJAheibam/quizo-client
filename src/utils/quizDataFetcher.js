@@ -11,10 +11,10 @@ export const getTopics = async () => {
   }
 };
 
-export const getQuizData = async (id) => {
+export const getQuizData = async ({ params }) => {
   try {
     const response = await axios.get(
-      `https://openapi.programming-hero.com/api/quiz/$%7Bid%7D`
+      `https://openapi.programming-hero.com/api/quiz/${params.id}`
     );
     return response.data.data;
   } catch (error) {

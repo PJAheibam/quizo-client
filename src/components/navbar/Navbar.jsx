@@ -9,12 +9,11 @@ import {
 } from "./Navbar.styles";
 import { HiMenuAlt3 as HamburgerIcon } from "react-icons/hi";
 import { CgClose as CloseIcon } from "react-icons/cg";
-import { useTheme } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const theme = useTheme();
-  const activeLinkStyle = { color: theme.palette.secondary.active };
+  const { pathname } = useLocation();
 
   return (
     <Wrapper>
@@ -23,11 +22,18 @@ const Navbar = () => {
         {open ? <CloseIcon /> : <HamburgerIcon />}
       </ToggleButton>
       <Links open={open}>
-        <Link to="" style={({ isActive }) => (isActive ? true : false)}>
+        <Link end to="/" isactive={pathname === "/" ? "true" : undefined}>
           Topics
         </Link>
-        <Link to="/statistics">Statistics</Link>
-        <Link to="/blog">Blog</Link>
+        <Link
+          to="/statistics"
+          isactive={pathname === "/statistics" ? "true" : undefined}
+        >
+          Statistics
+        </Link>
+        <Link to="/blog" isactive={pathname === "/blog" ? "true" : undefined}>
+          Blog
+        </Link>
       </Links>
     </Wrapper>
   );

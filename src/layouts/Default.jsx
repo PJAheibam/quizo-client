@@ -4,8 +4,6 @@ import Navbar from "../components/navbar/Navbar";
 import GlobalStyles from "../styles/GlobalStyles";
 
 const Default = () => {
-  const res = useLoaderData();
-  console.log(res);
   return (
     <>
       <GlobalStyles />

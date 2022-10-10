@@ -47,10 +47,8 @@ export const Links = styled.nav`
 export const Link = styled(NavLink)`
   text-transform: uppercase;
   /* color: ${(p) => p.theme.text.secondary}; */
-  /* color: ${(p) =>
-    p.style ? (isActive) => (isActive ? "Green" : "red") : "white"}; */
   color: ${(p) =>
-    p.style ? p.theme.palette.secondary.active : p.theme.text.secondary};
+    p.isactive ? p.theme.palette.secondary.active : p.theme.text.secondary};
   cursor: pointer;
   text-decoration: none;
   font-size: 1.25rem;
@@ -61,11 +59,9 @@ export const Link = styled(NavLink)`
   &:last-child {
     margin-bottom: 1rem;
   }
-  /* &[area-current] {
-    color: red;
-  } */
   &:hover {
-    color: ${(p) => p.theme.text.hovered};
+    color: ${(p) =>
+      p.isactive ? p.theme.palette.secondary.active : p.theme.text.hovered};
   }
 `;
 
@@ -76,7 +72,7 @@ export const ToggleButton = styled.button`
   font-size: 2.5rem;
   border: none;
   user-select: none;
-  transition: transform 250ms ease, color 300ms ease;
+  transition: transform 500ms ease, color 300ms ease;
   &:hover {
     color: ${(p) => p.theme.text.primary};
   }

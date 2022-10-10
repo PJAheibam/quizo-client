@@ -11,4 +11,7 @@ export default createGlobalStyle`
     :root{
         color-scheme: dark;
     }
+    /* .active{
+        color: black
+    } */
 `;
