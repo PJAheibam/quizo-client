@@ -5,7 +5,7 @@ export const getTopics = async () => {
     const response = await axios.get(
       "https://openapi.programming-hero.com/api/quiz"
     );
-    console.log(response);
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
@@ -16,7 +16,7 @@ export const getQuizData = async (id) => {
     const response = await axios.get(
       `https://openapi.programming-hero.com/api/quiz/$%7Bid%7D`
     );
-    console.log(response);
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
