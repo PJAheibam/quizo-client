@@ -17,21 +17,33 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <LogoContainer to="/">Site name</LogoContainer>
+      <LogoContainer to="/" onClick={() => setOpen((prev) => !prev)}>
+        Site name
+      </LogoContainer>
       <ToggleButton onClick={() => setOpen((prev) => !prev)} open={open}>
         {open ? <CloseIcon /> : <HamburgerIcon />}
       </ToggleButton>
       <Links open={open}>
-        <Link end to="/" isactive={pathname === "/" ? "true" : undefined}>
+        <Link
+          end
+          to="/"
+          isactive={pathname === "/" ? "true" : undefined}
+          onClick={() => setOpen((prev) => !prev)}
+        >
           Topics
         </Link>
         <Link
           to="/statistics"
           isactive={pathname === "/statistics" ? "true" : undefined}
+          onClick={() => setOpen((prev) => !prev)}
         >
           Statistics
         </Link>
-        <Link to="/blog" isactive={pathname === "/blog" ? "true" : undefined}>
+        <Link
+          to="/blog"
+          isactive={pathname === "/blog" ? "true" : undefined}
+          onClick={() => setOpen((prev) => !prev)}
+        >
           Blog
         </Link>
       </Links>

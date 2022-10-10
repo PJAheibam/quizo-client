@@ -7,6 +7,8 @@ export const Wrapper = styled.header`
   ${WrapperStyles}
   padding-block: 1rem;
   position: fixed;
+  left: 0;
+  top: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
