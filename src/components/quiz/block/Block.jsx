@@ -16,7 +16,11 @@ import parse from "html-react-parser";
 import { ImEye } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
-import { useUpdateResult, resultType } from "../../../context/ResultContext";
+import {
+  useUpdateResult,
+  resultType,
+  useResult,
+} from "../../../context/ResultContext";
 import { updateResultToLocalStorage } from "../../../utils/updateDataToLocalStorage";
 
 const QuizBlock = ({ data, index }) => {
@@ -30,6 +34,7 @@ const QuizBlock = ({ data, index }) => {
   );
   const [allowInput, setAllowInput] = useState(true);
   const updateResult = useUpdateResult();
+  const result = useResult();
 
   const handleClick = (index) => {
     if (allowInput) {
@@ -42,11 +47,24 @@ const QuizBlock = ({ data, index }) => {
   const checkResult = () => {
     setShowAnswer((prev) => !prev);
     setAllowInput(false);
-    updateResultToLocalStorage(quizID, data.id, selected);
     if (data.correctAnswer === data.options[selected]) {
       updateResult(resultType.CORRECT_GUESSED);
+      updateResultToLocalStorage(
+        quizID,
+        data.id,
+        selected,
+        result.correctGuessed + 1,
+        result.wrongGuessed
+      );
     } else {
       updateResult(resultType.WRONG_GUESSED);
+      updateResultToLocalStorage(
+        quizID,
+        data.id,
+        selected,
+        result.correctGuessed,
+        result.wrongGuessed + 1
+      );
     }
   };
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { useResult } from "../../../context/ResultContext";
+import React, { useEffect } from "react";
+import { useResult, useUpdateResult } from "../../../context/ResultContext";
 import {
   AsideWrapper,
   Container,
@@ -14,15 +14,19 @@ import {
 } from "./Aside.styles";
 import { resultType } from "../../../context/ResultContext";
 import { HiArrowRight as ArrowRight } from "react-icons/hi";
-import { getQuizAnsFromLocalStorage } from "../../../utils/updateDataToLocalStorage";
+import { getTopicResultInfo } from "../../../utils/updateDataToLocalStorage";
 
 const Aside = ({ data }) => {
   const result = useResult();
-
   const checkAllResult = () => {
     console.log(result);
   };
 
+  const update = useUpdateResult();
+  useEffect(() => {
+    const info = getTopicResultInfo(data.id);
+    update("all", info);
+  }, []);
   return (
     <Container>
       <AsideWrapper>
