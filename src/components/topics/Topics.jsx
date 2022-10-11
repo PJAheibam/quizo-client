@@ -7,7 +7,7 @@ import {
   Content,
   Name,
   Text,
-  Button,
+  LinkButton,
   Container,
 } from "./Topics.styles";
 
@@ -17,14 +17,14 @@ const Topics = () => {
   return (
     <Wrapper>
       {topics.map((topic) => (
-        <Container>
+        <Container key={topic.id}>
           <ThumbnailContainer>
             <Thumbnail src={topic.logo} alt="topic thumbnail" />
           </ThumbnailContainer>
           <Content>
             <Name> {topic.name} </Name>
             <Text>Total Quiz: {topic.total} </Text>
-            <Button>Take Quiz</Button>
+            <LinkButton to={`quiz/${topic.id}`}>Take Quiz</LinkButton>
           </Content>
         </Container>
       ))}

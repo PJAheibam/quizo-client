@@ -23,7 +23,7 @@ function App() {
         {
           path: "quiz/:id",
           element: <Quiz />,
-          // loader: getQuizData,
+          loader: getQuizData,
         },
         {
           path: "statistics",
