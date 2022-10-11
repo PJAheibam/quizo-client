@@ -1,7 +1,7 @@
 export const device = {
-  sm: "(min-width: 576px)",
-  md: "(min-width: 720px)",
-  lg: "(min-width: 960px)",
-  xl: "(min-width: 1280px)",
-  xxl: "(min-width: 1440px)",
+  sm: "screen and (min-width: 576px)",
+  md: "screen and (min-width: 720px)",
+  lg: "screen and (min-width: 960px)",
+  xl: "screen and (min-width: 1280px)",
+  xxl: "screen and (min-width: 1440px)",
 };

@@ -62,11 +62,14 @@ export const Thumbnail = styled.img`
 `;
 export const Name = styled.h2`
   font-size: 1.75rem;
+  letter-spacing: 2px;
   margin-bottom: 0.15em;
   color: ${(p) => p.theme.text.primary};
 `;
 
 export const Text = styled.p`
+  letter-spacing: 1px;
+  font-weight: 500;
   color: ${(p) => p.theme.text.secondary};
 `;
 
