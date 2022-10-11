@@ -29,7 +29,8 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 export const Question = styled.h2`
-  font-weight: 600;
+  font-weight: 500;
+  color: ${(p) => p.theme.text.primary};
   letter-spacing: 1px;
   margin-bottom: 1rem;
 `;
@@ -46,7 +47,9 @@ export const QuestionHeader = styled.div`
 `;
 
 export const HeaderText = styled.h1`
+  color: ${(p) => p.theme.text.primary};
   letter-spacing: 1px;
+  font-weight: 500;
 `;
 
 export const CheckAnsBtn = styled.button`
@@ -74,7 +77,7 @@ export const Options = styled.div`
 `;
 
 export const BulletPoint = styled.span`
-  will-change: border;
+  will-change: border, background-color;
   position: relative;
   display: flex;
   justify-content: center;
@@ -84,7 +87,7 @@ export const BulletPoint = styled.span`
   border-radius: 50%;
   padding: 2px;
   border: 1px solid ${(p) => p.theme.text.disabled};
-  transition: border 300ms ease;
+  transition: border 300ms ease, background-color 500ms ease;
   ${(p) => {
     if (p.showresult) {
       if (p.checked) {
@@ -122,9 +125,11 @@ export const BulletPoint = styled.span`
 
 export const Text = styled.p`
   letter-spacing: 1px;
+  color: ${(p) => p.theme.text.secondary};
 `;
 
 export const Option = styled.label`
+  will-change: border, background-color;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -147,6 +152,7 @@ export const Option = styled.label`
       }
     }
   }}
+  transition: border 350ms ease, background-color 350ms ease;
   &:hover ${BulletPoint} {
     border: 1px solid ${(p) => p.theme.text.primary};
   }

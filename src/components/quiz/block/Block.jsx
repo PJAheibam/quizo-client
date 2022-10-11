@@ -17,13 +17,10 @@ import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
 
 const QuizBlock = ({ data, index }) => {
-  const {
-    props: { children: question },
-  } = parse(data.question);
-
+  const { props } = parse(data.question);
+  const ques = props?.children;
   const [selected, setSelected] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
-
   const handleClick = (index) => {
     setSelected(index);
   };
@@ -47,7 +44,7 @@ const QuizBlock = ({ data, index }) => {
         </CheckAnsBtn>
       </QuestionHeader>
       <QuestionBody>
-        <Question>{question}</Question>
+        <Question>{ques?.props?.children || ques || data.question}</Question>
         <Options showresult={showAnswer}>
           {data.options.map((option, index) => (
             <Option
@@ -68,7 +65,7 @@ const QuizBlock = ({ data, index }) => {
                   ) : (
                     <Cross />
                   )
-                ) : data.correctAnswer === data.options[index] ? (
+                ) : showAnswer && data.correctAnswer === data.options[index] ? (
                   <Tick />
                 ) : (
                   ""

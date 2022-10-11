@@ -11,6 +11,9 @@ export default createGlobalStyle`
     :root{
         color-scheme: dark;
     }
+    html{
+        scroll-behavior: smooth;
+    }
     body{
         font-family: "Outfit", sans-serif;
         font-size: 1.15rem;

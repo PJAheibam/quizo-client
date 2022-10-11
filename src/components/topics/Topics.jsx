@@ -13,7 +13,7 @@ import {
 
 const Topics = () => {
   const topics = useLoaderData();
-  console.log(topics);
+
   return (
     <Wrapper>
       {topics.map((topic) => (

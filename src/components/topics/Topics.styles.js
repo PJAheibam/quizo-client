@@ -26,7 +26,7 @@ export const Container = styled.section`
   width: 100%;
   height: fit-content;
   background-color: ${(p) => p.theme.paper.dark};
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -38,15 +38,16 @@ export const Container = styled.section`
 `;
 
 export const ThumbnailContainer = styled.figure`
-  /* flex-basis: 30%; */
+  /* flex-basis: auto; */
   aspect-ratio: 1/1;
+  width: fit-content;
   height: fit-content;
   margin: 1rem;
   margin-right: 0;
   border-radius: 0.5rem;
   border: 5px solid ${(p) => p.theme.paper.main};
-  overflow: hidden;
   @media ${device.lg} {
+    overflow: hidden;
     margin-inline: auto;
   }
 `;
