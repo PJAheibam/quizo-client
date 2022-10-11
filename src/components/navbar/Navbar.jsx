@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <Wrapper>
-      <LogoContainer to="/" onClick={() => setOpen((prev) => !prev)}>
+      <LogoContainer to="/" onClick={() => setOpen(false)}>
         Site name
       </LogoContainer>
       <ToggleButton onClick={() => setOpen((prev) => !prev)} open={open}>
