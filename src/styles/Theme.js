@@ -84,6 +84,6 @@ export const dark = {
     primary: "hsla(0, 0%, 93%, 0.87)",
     hovered: "hsla(0, 0%, 93%, 0.75)",
     secondary: "hsla(0, 0%, 93%, 0.70)",
-    disabled: "hsla(0, 0%, 93%, 0.4)",
+    disabled: "hsla(0, 0%, 93%, 0.3)",
   },
 };

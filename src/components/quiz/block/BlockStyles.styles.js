@@ -52,18 +52,22 @@ export const HeaderText = styled.h1`
 `;
 
 export const CheckAnsBtn = styled.button`
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
+  pointer-events: ${(p) => (p.hide ? "none" : "auto")};
   will-change: color;
-  cursor: pointer;
   background-color: transparent;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: ${(p) => p.theme.text.secondary};
+  opacity: ${(p) => (p.hide ? 0 : 1)};
+  color: ${(p) =>
+    p.disabled ? p.theme.text.disabled : p.theme.text.secondary};
   transition: color 300ms ease;
   &:hover {
-    color: ${(p) => p.theme.text.primary};
+    color: ${(p) =>
+      p.disabled ? p.theme.text.disabled : p.theme.text.primary};
   }
 `;
 

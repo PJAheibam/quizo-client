@@ -1,13 +1,16 @@
 import styled, { css } from "styled-components";
+import { device } from "../../../utils/device";
 
 export const AsideWrapper = styled.article`
-  position: sticky;
-  top: 125px;
-  height: calc(100vh - 125px);
-  overflow-y: auto;
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: ${(p) => p.theme.paper.main};
+  @media ${device.lg} {
+    position: sticky;
+    top: 125px;
+    height: calc(100vh - 125px);
+    overflow-y: auto;
+  }
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -27,7 +30,7 @@ export const AsideWrapper = styled.article`
 `;
 export const Container = styled.aside`
   position: relative;
-  flex-basis: 40%;
+  flex-basis: 50%;
 `;
 
 export const ThumbnailContainer = styled.figure`

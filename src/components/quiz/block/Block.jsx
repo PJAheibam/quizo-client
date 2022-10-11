@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Container,
   QuestionHeader,
@@ -15,30 +16,46 @@ import parse from "html-react-parser";
 import { ImEye } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
+import { useUpdateResult } from "../../../context/ResultContext";
+import {
+  updateResultToLocalStorage,
+  getQuizAnsFromLocalStorage,
+} from "../../../utils/updateDataToLocalStorage";
 
 const QuizBlock = ({ data, index }) => {
+  const { id: quizID } = useParams();
+  const initialSelectedValue = getQuizAnsFromLocalStorage(quizID, data.id);
   const { props } = parse(data.question);
   const ques = props?.children;
-  const [selected, setSelected] = useState(null);
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [selected, setSelected] = useState(initialSelectedValue);
+  const [showAnswer, setShowAnswer] = useState(
+    initialSelectedValue !== null ? true : false
+  );
+  const [allowInput, setAllowInput] = useState(true);
   const handleClick = (index) => {
-    setSelected(index);
+    if (allowInput) {
+      setSelected(index);
+    } else {
+      console.log("You just give the answer!");
+    }
   };
 
   const checkResult = () => {
     setShowAnswer((prev) => !prev);
-    // if (selected != null && data.correctAnswer === data.options[selected]) {
-    //   console.info("Correct! ");
-    // } else {
-    //   console.info("Wrong guessed!");
-    // }
+    setAllowInput(false);
+    updateResultToLocalStorage(quizID, data.id, selected);
   };
 
   return (
     <Container>
       <QuestionHeader>
         <HeaderText>Question {++index}</HeaderText>
-        <CheckAnsBtn title="check answer" onClick={checkResult}>
+        <CheckAnsBtn
+          title="check answer"
+          onClick={checkResult}
+          disabled={selected === null ? true : false}
+          hide={showAnswer}
+        >
           {" "}
           <ImEye />{" "}
         </CheckAnsBtn>

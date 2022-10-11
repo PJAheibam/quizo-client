@@ -14,9 +14,16 @@ import {
 } from "./Aside.styles";
 import { resultType } from "../../../context/ResultContext";
 import { HiArrowRight as ArrowRight } from "react-icons/hi";
+import { getQuizAnsFromLocalStorage } from "../../../utils/updateDataToLocalStorage";
 
 const Aside = ({ data }) => {
   const result = useResult();
+
+  const checkAllResult = () => {
+    const data = getQuizAnsFromLocalStorage();
+    console.log(data);
+  };
+
   return (
     <Container>
       <AsideWrapper>
@@ -38,8 +45,8 @@ const Aside = ({ data }) => {
             <Foo>Wrong Guessed</Foo>
           </Block>
         </Content>
-        <CheckAllBtn>
-          See Result <ArrowRight />{" "}
+        <CheckAllBtn onClick={checkAllResult}>
+          See All Result <ArrowRight />{" "}
         </CheckAllBtn>
       </AsideWrapper>
     </Container>
