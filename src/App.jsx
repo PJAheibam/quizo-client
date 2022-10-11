@@ -28,6 +28,7 @@ function App() {
         {
           path: "statistics",
           element: <Statistics />,
+          loader: getTopics,
         },
         {
           path: "blog",
