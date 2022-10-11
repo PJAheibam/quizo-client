@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Container,
@@ -16,22 +16,21 @@ import parse from "html-react-parser";
 import { ImEye } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
-import { useUpdateResult } from "../../../context/ResultContext";
-import {
-  updateResultToLocalStorage,
-  getQuizAnsFromLocalStorage,
-} from "../../../utils/updateDataToLocalStorage";
+import { useUpdateResult, resultType } from "../../../context/ResultContext";
+import { updateResultToLocalStorage } from "../../../utils/updateDataToLocalStorage";
 
 const QuizBlock = ({ data, index }) => {
+  // console.info(data.guessedIndex);
   const { id: quizID } = useParams();
-  const initialSelectedValue = getQuizAnsFromLocalStorage(quizID, data.id);
   const { props } = parse(data.question);
   const ques = props?.children;
-  const [selected, setSelected] = useState(initialSelectedValue);
+  const [selected, setSelected] = useState(data.guessedIndex);
   const [showAnswer, setShowAnswer] = useState(
-    initialSelectedValue !== null ? true : false
+    selected !== null ? true : false
   );
   const [allowInput, setAllowInput] = useState(true);
+  const updateResult = useUpdateResult();
+
   const handleClick = (index) => {
     if (allowInput) {
       setSelected(index);
@@ -44,6 +43,11 @@ const QuizBlock = ({ data, index }) => {
     setShowAnswer((prev) => !prev);
     setAllowInput(false);
     updateResultToLocalStorage(quizID, data.id, selected);
+    if (data.correctAnswer === data.options[selected]) {
+      updateResult(resultType.CORRECT_GUESSED);
+    } else {
+      updateResult(resultType.WRONG_GUESSED);
+    }
   };
 
   return (

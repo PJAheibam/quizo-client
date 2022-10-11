@@ -19,8 +19,14 @@ export const useUpdateResult = () => useContext(UpdateResultContext);
 export default function ResultProvider({ children }) {
   const [result, setResult] = useState(initalValue);
 
-  const handleUpdate = (property, value) => {
-    setResult({ ...result, [property]: value });
+  const handleUpdate = (property) => {
+    if (property === resultType.CORRECT_GUESSED) {
+      setResult({ ...result, [property]: result.correctGuessed + 1 });
+      console.log("right: ", result.correctGuessed + 1);
+    } else {
+      setResult({ ...result, [property]: result.wrongGuessed + 1 });
+      console.log("wrong: ", result.wrongGuessed + 1);
+    }
   };
 
   return (

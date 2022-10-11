@@ -20,8 +20,7 @@ const Aside = ({ data }) => {
   const result = useResult();
 
   const checkAllResult = () => {
-    const data = getQuizAnsFromLocalStorage();
-    console.log(data);
+    console.log(result);
   };
 
   return (
@@ -41,7 +40,7 @@ const Aside = ({ data }) => {
             <Foo>Guessed Correctly</Foo>
           </Block>
           <Block>
-            <Total variant="error"> {result.correctGuessed}</Total>
+            <Total variant="error"> {result.wrongGuessed}</Total>
             <Foo>Wrong Guessed</Foo>
           </Block>
         </Content>
