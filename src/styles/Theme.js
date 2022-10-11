@@ -55,7 +55,7 @@ export const dark = {
       disabled: "rgba(255,255,255,0.1)",
     },
     success: {
-      active: "hsla119, 28%, 61%)",
+      active: "hsl(119, 28%, 61%)",
       bg: "hsla(119, 28%, 61%, 0.25)",
       hovered: "hsla(119, 28%, 61%, 0.45)",
       disabled: "hsla(119, 28%, 61%, 0.1)",

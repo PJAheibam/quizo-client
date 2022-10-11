@@ -6,7 +6,6 @@ import QuizBlock from "./block/Block";
 
 const Quiz = () => {
   const data = useLoaderData();
-  console.log(data);
   return (
     <Wrapper>
       <Container>
