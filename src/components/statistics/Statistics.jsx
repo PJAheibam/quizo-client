@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Wrapper, FooterText } from "./Statistics.styles";
+import { useWindowSize } from "react-use-size";
 import {
   BarChart,
   Bar,
@@ -21,11 +22,12 @@ const Statistics = () => {
     const info = getTopicResultInfo(topic.id);
     return { ...topic, ...info };
   });
-
+  const { height, width } = useWindowSize();
+  const aspectRatio = width / (height - 150);
   return (
     <Container>
       <Wrapper>
-        <ResponsiveContainer width="100%" aspect={1.5}>
+        <ResponsiveContainer width="100%" aspect={aspectRatio}>
           <BarChart
             width={500}
             height={300}
