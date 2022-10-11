@@ -17,7 +17,7 @@ export const useResult = () => useContext(ResultContext);
 export const useUpdateResult = () => useContext(UpdateResultContext);
 
 export default function ResultProvider({ children }) {
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState(initalValue);
 
   const handleUpdate = (property, value) => {
     setResult({ ...result, [property]: value });

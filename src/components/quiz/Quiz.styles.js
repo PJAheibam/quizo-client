@@ -18,4 +18,8 @@ export const Container = styled.article`
   }
 `;
 
-export const QuizSection = styled.section``;
+export const QuizSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;

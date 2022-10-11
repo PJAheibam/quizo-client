@@ -17,6 +17,7 @@ export default createGlobalStyle`
     body{
         font-family: "Outfit", sans-serif;
         font-size: 1.15rem;
+        background-color: ${(p) => p.theme.background};
     }
     /* .active{
         color: black

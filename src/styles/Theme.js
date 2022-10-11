@@ -1,7 +1,7 @@
 export const dark = {
   background: "hsl(216, 18%, 16%)",
   paper: {
-    light: "	hsl(217, 10%, 30%)",
+    light: "hsl(217, 10%, 30%)",
     main: "	hsl(217, 10%, 25%)",
     dark: "	hsl(217, 10%, 20%)",
   },
@@ -19,21 +19,22 @@ export const dark = {
       disabled: "rgba(255,255,255,0.1)",
     },
     secondary: {
-      active: "hsl(15, 67%, 52%)",
-      bg: "hsla(15, 67%, 52%, 0.25)",
+      active: "hsl(15, 67%, 55%)",
+      bg: "hsla(15, 67%, 52%, 0.1)",
       hovered: "hsla(15, 67%, 52%, 0.45)",
-      disabled: "hsla(15, 67%, 52%, 0.1)",
+      disabled: "hsla(15, 67%, 52%, 0.05)",
     },
     onSecondary: {
+      color: "hsl(15, 65%, 66%)",
       hovered: "rgba(255,255,255,0.65)",
       unHovered: "rgba(255,255,255,0.45)",
       active: "rgba(255,255,255,0.7)",
       disabled: "rgba(255,255,255,0.1)",
     },
     error: {
-      active: "hsl(353, 84%, 52%)",
-      bg: "hsla(353, 84%, 52%, 0.25)",
-      hovered: "hsla(353, 84%, 52%, 0.45)",
+      active: "hsl(353, 84%, 62%)",
+      bg: "hsla(353, 84%, 52%, 0.2)",
+      hovered: "hsla(353, 84%, 52%, 0.35)",
       disabled: "hsla(353, 84%, 52%, 0.1)",
     },
     onError: {

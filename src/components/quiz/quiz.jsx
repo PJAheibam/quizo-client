@@ -9,7 +9,6 @@ import ResultProvider from "../../context/ResultContext";
 
 const Quiz = () => {
   const data = useLoaderData();
-  console.log(data);
   return (
     <>
       <ResultProvider>

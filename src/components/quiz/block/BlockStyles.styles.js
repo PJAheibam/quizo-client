@@ -23,7 +23,6 @@ const radioErrorStyles = css`
 `;
 
 export const Container = styled.div`
-  margin-bottom: 2rem;
   border-radius: 5px;
   background-color: ${(p) => p.theme.paper.dark};
   overflow: hidden;

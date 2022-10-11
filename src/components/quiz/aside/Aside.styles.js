@@ -1,20 +1,41 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const AsideWrapper = styled.article`
   position: sticky;
   top: 125px;
+  height: calc(100vh - 125px);
+  overflow-y: auto;
   padding: 1rem;
-  background-color: ${(p) => p.theme.paper.main};
   border-radius: 0.5rem;
+  background-color: ${(p) => p.theme.paper.main};
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    margin-block: 0.5rem;
+    border-radius: 8px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: hsl(217, 10%, 35%);
+    transition: background-color 350ms ease;
+    &:hover {
+      background-color: hsl(217, 10%, 40%);
+    }
+  }
 `;
 export const Container = styled.aside`
   position: relative;
   flex-basis: 40%;
 `;
 
-export const ThumbnailContainer = styled.figure``;
+export const ThumbnailContainer = styled.figure`
+  display: flex;
+  justify-content: center;
+`;
 export const Thumbnail = styled.img`
-  width: 100%;
+  width: 80%;
 `;
 
 export const Content = styled.section``;
@@ -43,7 +64,16 @@ export const Total = styled.div`
   padding: 2rem;
   margin-inline: auto;
   text-align: center;
-  background-color: ${(p) => p.theme.paper.dark};
+  color: ${(p) => {
+    if (p.variant === "success") return p.theme.palette.success.active;
+    else if (p.variant === "error") return p.theme.palette.error.active;
+    else return p.theme.text.secondary;
+  }};
+  background-color: ${(p) => {
+    if (p.variant === "success") return p.theme.palette.success.bg;
+    else if (p.variant === "error") return p.theme.palette.error.bg;
+    else return p.theme.paper.dark;
+  }};
   border-radius: 50%;
 `;
 export const Foo = styled.p`
@@ -51,4 +81,28 @@ export const Foo = styled.p`
   font-size: 1.5rem;
   font-weight: 500;
   color: ${(p) => p.theme.text.secondary};
+`;
+
+export const CheckAllBtn = styled.button`
+  will-change: background-color, color;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  padding: 0.5em 1em;
+  border-radius: 0.25rem;
+  color: ${(p) => p.theme.palette.secondary.active};
+  background-color: ${(p) => p.theme.palette.secondary.bg};
+  border: 2px solid ${(p) => p.theme.palette.secondary.active};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 350ms ease, color 350ms ease;
+  &:hover {
+    color: ${(p) => p.theme.text.primary};
+    background-color: ${(p) => p.theme.palette.secondary.hovered};
+  }
 `;
