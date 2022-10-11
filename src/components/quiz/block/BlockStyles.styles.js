@@ -10,6 +10,18 @@ const errorStyles = css`
   background-color: ${(p) => p.theme.palette.error.bg};
 `;
 
+const radioCorrectStyles = css`
+  border: none;
+  background-color: ${(p) => p.theme.palette.success.active};
+  /* outline: 1px solid ${(p) => p.theme.palette.success.active}; */
+`;
+
+const radioErrorStyles = css`
+  border: none;
+  background-color: ${(p) => p.theme.palette.error.active};
+  /* outline: 1px solid ${(p) => p.theme.palette.error.active}; */
+`;
+
 export const Container = styled.div`
   margin-bottom: 2rem;
   border-radius: 5px;
@@ -64,11 +76,30 @@ export const Options = styled.div`
 export const BulletPoint = styled.span`
   will-change: border;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.25rem;
   height: 1.25rem;
   border-radius: 50%;
+  padding: 2px;
   border: 1px solid ${(p) => p.theme.text.disabled};
   transition: border 300ms ease;
+  ${(p) => {
+    if (p.showresult) {
+      if (p.checked) {
+        if (p.iscorrect) {
+          return radioCorrectStyles;
+        } else {
+          return radioErrorStyles;
+        }
+      } else {
+        if (p.iscorrect) {
+          return radioCorrectStyles;
+        }
+      }
+    }
+  }}
   &::after {
     will-change: background-color;
     position: absolute;
@@ -80,7 +111,11 @@ export const BulletPoint = styled.span`
     border-radius: 50%;
     transform: translate(-50%, -50%);
     background-color: ${(p) =>
-      p.checked ? p.theme.text.secondary : "transparent"};
+      p.checked
+        ? p.showresult
+          ? "transparent"
+          : p.theme.text.secondary
+        : "transparent"};
     transition: background-color 300ms ease;
   }
 `;

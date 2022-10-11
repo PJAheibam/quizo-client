@@ -13,6 +13,8 @@ import {
 } from "./BlockStyles.styles";
 import parse from "html-react-parser";
 import { ImEye } from "react-icons/im";
+import { MdClose as Cross } from "react-icons/md";
+import { BsCheck as Tick } from "react-icons/bs";
 
 const QuizBlock = ({ data, index }) => {
   const {
@@ -28,12 +30,11 @@ const QuizBlock = ({ data, index }) => {
 
   const checkResult = () => {
     setShowAnswer((prev) => !prev);
-
-    if (selected != null && data.correctAnswer === data.options[selected]) {
-      console.info("Yeah!");
-    } else {
-      console.info("wrong guessed!");
-    }
+    // if (selected != null && data.correctAnswer === data.options[selected]) {
+    //   console.info("Correct! ");
+    // } else {
+    //   console.info("Wrong guessed!");
+    // }
   };
 
   return (
@@ -56,7 +57,23 @@ const QuizBlock = ({ data, index }) => {
               showresult={showAnswer}
               iscorrect={data.correctAnswer === data.options[index]}
             >
-              <BulletPoint checked={index === selected ? true : undefined} />
+              <BulletPoint
+                checked={index === selected ? true : undefined}
+                showresult={showAnswer}
+                iscorrect={data.correctAnswer === data.options[index]}
+              >
+                {showAnswer && index === selected ? (
+                  data.correctAnswer === data.options[index] ? (
+                    <Tick />
+                  ) : (
+                    <Cross />
+                  )
+                ) : data.correctAnswer === data.options[index] ? (
+                  <Tick />
+                ) : (
+                  ""
+                )}
+              </BulletPoint>
               <Text>{option}</Text>
             </Option>
           ))}
