@@ -40,7 +40,7 @@ export const Links = styled.nav`
   background-color: ${(p) => p.theme.paper.dark};
   max-height: ${(p) => (p.open ? "150px" : "0px")};
   overflow: hidden;
-  transition: max-height 750ms ease-out;
+  transition: max-height 500ms ease-out;
   @media ${device.md} {
     position: relative;
     max-height: 500px;
@@ -82,15 +82,18 @@ export const ToggleButton = styled.button`
   cursor: pointer;
   background-color: transparent;
   color: ${(p) => p.theme.text.secondary};
+  min-width: 40px;
+  min-height: 40px;
   font-size: 2.5rem;
   border: none;
   user-select: none;
-  transition: transform 500ms ease, color 300ms ease;
+  transition: font-size 500ms ease, color 300ms ease;
   &:hover {
     color: ${(p) => p.theme.text.primary};
   }
   &:active {
-    transform: scale(0);
+    /* transform: scale(0); */
+    font-size: 0;
   }
 
   @media ${device.md} {
