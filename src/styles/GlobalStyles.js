@@ -10,6 +10,7 @@ export default createGlobalStyle`
     }
     :root{
         color-scheme: dark;
+        --toastify-color-dark: ${(p) => p.theme.background}
     }
     html{
         scroll-behavior: smooth;
@@ -19,7 +20,11 @@ export default createGlobalStyle`
         font-size: 1.15rem;
         background-color: ${(p) => p.theme.background};
     }
-    /* .active{
-        color: black
-    } */
+    //toastify custom style
+    .Toastify__toast{
+        @media only screen and (max-width: 480px){
+            margin-top: 0.5rem;
+            margin-inline: 1rem;
+        }
+    } 
 `;

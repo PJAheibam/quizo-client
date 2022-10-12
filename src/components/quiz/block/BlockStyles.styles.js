@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { FocusStyle } from "../../../styles/FocusStyle";
 
 const correctStyles = css`
   border: 2px solid ${(p) => p.theme.palette.success.active};
@@ -52,7 +53,7 @@ export const HeaderText = styled.h1`
 `;
 
 export const CheckAnsBtn = styled.button`
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
+  cursor: pointer;
   pointer-events: ${(p) => (p.hide ? "none" : "auto")};
   will-change: color;
   background-color: transparent;
@@ -68,6 +69,10 @@ export const CheckAnsBtn = styled.button`
   &:hover {
     color: ${(p) =>
       p.disabled ? p.theme.text.disabled : p.theme.text.primary};
+  }
+  &:focus-visible {
+    ${FocusStyle};
+    border-radius: 0.5px;
   }
 `;
 

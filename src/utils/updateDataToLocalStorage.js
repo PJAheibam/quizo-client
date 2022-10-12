@@ -44,7 +44,7 @@ export const getQuizAnsFromLocalStorage = (quizID, questionID) => {
 
 export const getTopicResultInfo = (id) => {
   const quiz = JSON.parse(localStorage.getItem("quiz"));
-
+  return null;
   if (quiz && quiz[id]) {
     return {
       correctGuessed: quiz[id].correctGuessed || 0,

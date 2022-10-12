@@ -13,59 +13,49 @@ import {
   BulletPoint,
 } from "./BlockStyles.styles";
 import parse from "html-react-parser";
-import { ImEye } from "react-icons/im";
+import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
-import {
-  useUpdateResult,
-  resultType,
-  useResult,
-} from "../../../context/ResultContext";
-import { updateResultToLocalStorage } from "../../../utils/updateDataToLocalStorage";
+import { useUpdateResult, useResult } from "../../../context/ResultContext";
 
-const QuizBlock = ({ data, index }) => {
-  // console.info(data.guessedIndex);
-  const { id: quizID } = useParams();
+const QuizBlock = ({ data, index, notify }) => {
   const { props } = parse(data.question);
   const ques = props?.children;
-  const [selected, setSelected] = useState(data.guessedIndex);
-  const [showAnswer, setShowAnswer] = useState(
-    selected !== null ? true : false
-  );
+  const [selected, setSelected] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [allowInput, setAllowInput] = useState(true);
   const updateResult = useUpdateResult();
   const result = useResult();
 
+  function checkAns(index) {
+    if (data.correctAnswer === data.options[index]) return "right";
+    else return "wrong";
+  }
+
   const handleClick = (index) => {
     if (allowInput) {
       setSelected(index);
-    } else {
-      console.log("You just give the answer!");
+      const newData = result.map((q) => {
+        if (q.questionID === data.id)
+          return {
+            questionID: data.id,
+            guessed: checkAns(index),
+          };
+        else return q;
+      });
+      notify(checkAns(index));
+      updateResult(newData);
     }
   };
 
   const checkResult = () => {
     setShowAnswer((prev) => !prev);
-    setAllowInput(false);
-    if (data.correctAnswer === data.options[selected]) {
-      updateResult(resultType.CORRECT_GUESSED);
-      updateResultToLocalStorage(
-        quizID,
-        data.id,
-        selected,
-        result.correctGuessed + 1,
-        result.wrongGuessed
-      );
-    } else {
-      updateResult(resultType.WRONG_GUESSED);
-      updateResultToLocalStorage(
-        quizID,
-        data.id,
-        selected,
-        result.correctGuessed,
-        result.wrongGuessed + 1
-      );
-    }
+    setAllowInput((prev) => !prev);
+    // if (data.correctAnswer === data.options[selected]) {
+    //   updateResult(resultType.CORRECT_GUESSED);
+    // } else {
+    //   if (selected !== null) updateResult(resultType.WRONG_GUESSED);
+    // }
   };
 
   return (
@@ -73,13 +63,10 @@ const QuizBlock = ({ data, index }) => {
       <QuestionHeader>
         <HeaderText>Question {++index}</HeaderText>
         <CheckAnsBtn
-          title="check answer"
+          title={showAnswer ? "Hide Answer" : "Show Answer"}
           onClick={checkResult}
-          disabled={selected === null ? true : false}
-          hide={showAnswer}
         >
-          {" "}
-          <ImEye />{" "}
+          {showAnswer ? <ImEyeBlocked /> : <ImEye />}
         </CheckAnsBtn>
       </QuestionHeader>
       <QuestionBody>

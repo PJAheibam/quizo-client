@@ -12,20 +12,32 @@ import {
   Thumbnail,
   CheckAllBtn,
 } from "./Aside.styles";
-import { resultType } from "../../../context/ResultContext";
 import { HiArrowRight as ArrowRight } from "react-icons/hi";
-import { getTopicResultInfo } from "../../../utils/updateDataToLocalStorage";
 
 const Aside = ({ data }) => {
   const result = useResult();
+  const updateResult = useUpdateResult();
+  const guessed = result.reduce(
+    (prevValue, currentValue) => {
+      if (currentValue.guessed === "right") {
+        return { ...prevValue, correct: prevValue.correct + 1 };
+      } else if (currentValue.guessed === "wrong") {
+        return { ...prevValue, wrong: prevValue.wrong + 1 };
+      } else return prevValue;
+    },
+    { correct: 0, wrong: 0 }
+  );
+  // console.info(guessed);
   const checkAllResult = () => {
+    // console.log(guessed);
     console.log(result);
   };
-
-  const update = useUpdateResult();
   useEffect(() => {
-    const info = getTopicResultInfo(data.id);
-    update("all", info);
+    const res = data.questions.map((question) => ({
+      questionID: question.id,
+      guessed: "not-guessed",
+    }));
+    updateResult(res);
   }, []);
   return (
     <Container>
@@ -40,11 +52,11 @@ const Aside = ({ data }) => {
             <Foo>Total Quiz</Foo>
           </Block>
           <Block>
-            <Total variant="success"> {result.correctGuessed}</Total>
+            <Total variant="success"> {guessed.correct}</Total>
             <Foo>Guessed Correctly</Foo>
           </Block>
           <Block>
-            <Total variant="error"> {result.wrongGuessed}</Total>
+            <Total variant="error"> {guessed.wrong}</Total>
             <Foo>Wrong Guessed</Foo>
           </Block>
         </Content>

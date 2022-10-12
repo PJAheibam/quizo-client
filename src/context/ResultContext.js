@@ -13,20 +13,12 @@ export const useResult = () => useContext(ResultContext);
 export const useUpdateResult = () => useContext(UpdateResultContext);
 
 export default function ResultProvider({ children }) {
-  const initialValue = {
-    correctGuessed: 0,
-    wrongGuessed: 0,
-  };
+  const initialValue = [];
   const [result, setResult] = useState(initialValue);
 
-  const handleUpdate = (property, value) => {
-    if (property === resultType.ALL) {
-      setResult(value);
-    } else if (property === resultType.CORRECT_GUESSED) {
-      setResult({ ...result, [property]: result.correctGuessed + 1 });
-    } else {
-      setResult({ ...result, [property]: result.wrongGuessed + 1 });
-    }
+  const handleUpdate = (value) => {
+    setResult(value);
+    console.log(value);
   };
 
   return (
