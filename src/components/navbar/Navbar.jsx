@@ -18,9 +18,13 @@ const Navbar = () => {
     setOpen((prev) => !prev);
     window.scrollTo(0, 0);
   };
+  const handleLogoClick = () => {
+    setOpen(false);
+    window.scrollTo(0, 0);
+  };
   return (
     <Wrapper>
-      <LogoContainer to="/" onClick={handleClick}>
+      <LogoContainer to="/" onClick={handleLogoClick}>
         <Logo />
       </LogoContainer>
       <ToggleButton onClick={() => setOpen((prev) => !prev)} open={open}>
