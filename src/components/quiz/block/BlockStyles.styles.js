@@ -139,7 +139,8 @@ export const Text = styled.p`
 export const Option = styled.label`
   will-change: border, background-color;
   cursor: pointer;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   padding: 1rem;
   border-radius: 0.25rem;
