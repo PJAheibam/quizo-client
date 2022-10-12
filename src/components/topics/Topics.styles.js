@@ -5,15 +5,16 @@ import { device } from "../../utils/device";
 
 export const Wrapper = styled.article`
   ${WrapperStyles};
-  padding-block: 1.5rem;
+  padding-block: 2.5rem;
   scroll-margin-top: 92px;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 92px);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   @media ${device.md} {
     display: grid;
-    min-height: 200px;
+    align-items: center;
+    min-height: calc(100vh - 92px);
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 1fr;
   }
