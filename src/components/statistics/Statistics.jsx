@@ -12,7 +12,6 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useLoaderData } from "react-router-dom";
-import { getTopicResultInfo } from "../../utils/updateDataToLocalStorage";
 import { useTheme } from "styled-components";
 
 const Statistics = () => {

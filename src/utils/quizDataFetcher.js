@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getQuizAnsFromLocalStorage } from "./updateDataToLocalStorage";
 
 export const getTopics = async () => {
   try {
@@ -17,13 +16,7 @@ export const getQuizData = async ({ params }) => {
     const response = await axios.get(
       `https://openapi.programming-hero.com/api/quiz/${params.id}`
     );
-    let data = response.data.data;
-
-    const questions = data.questions.map((item) => ({
-      ...item,
-      guessedIndex: getQuizAnsFromLocalStorage(data.id, item.id),
-    }));
-    return { ...data, questions: questions };
+    return response.data.data;
   } catch (error) {
     console.log(error);
   }
