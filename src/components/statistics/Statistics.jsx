@@ -17,11 +17,7 @@ import { useTheme } from "styled-components";
 
 const Statistics = () => {
   const theme = useTheme();
-  const topics = useLoaderData();
-  const data = topics.map((topic) => {
-    const info = getTopicResultInfo(topic.id);
-    return { ...topic, ...info };
-  });
+  const data = useLoaderData();
   const { height, width } = useWindowSize();
   const aspectRatio = width / (height - 150);
   return (
@@ -47,12 +43,10 @@ const Statistics = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="correctGuessed" fill="#82ca9d" />
-            <Bar dataKey="total" fill="#8884d8" />
-            <Bar dataKey="wrongGuessed" fill={theme.palette.error.active} />
+            <Bar dataKey="total" name="Total Quiz" fill="#82ca9d" />
           </BarChart>
         </ResponsiveContainer>
-        <FooterText>Result Analytics</FooterText>
+        <FooterText>Topics Analytics</FooterText>
       </Wrapper>
     </Container>
   );

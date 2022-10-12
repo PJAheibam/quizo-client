@@ -72,7 +72,7 @@ export const CheckAnsBtn = styled.button`
   }
   &:focus-visible {
     ${FocusStyle};
-    border-radius: 0.5px;
+    border-radius: 0;
   }
 `;
 
@@ -146,14 +146,14 @@ export const Option = styled.label`
   border: 2px solid ${(p) => p.theme.paper.light};
   gap: 1rem;
   ${(p) => {
-    if (p.showresult) {
-      if (p.checked) {
-        if (p.iscorrect) {
-          return correctStyles;
-        } else {
-          return errorStyles;
-        }
+    if (p.checked) {
+      if (p.iscorrect) {
+        return correctStyles;
       } else {
+        return errorStyles;
+      }
+    } else {
+      if (p.showresult) {
         if (p.iscorrect) {
           return correctStyles;
         }
