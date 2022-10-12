@@ -20,6 +20,7 @@ export const AsideWrapper = styled.article`
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
+    border: none;
     border-radius: 8px;
     background-color: hsl(217, 10%, 35%);
     transition: background-color 350ms ease;
