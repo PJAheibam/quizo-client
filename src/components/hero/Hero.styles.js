@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
 
@@ -83,4 +83,32 @@ export const CTA = styled.a`
     box-shadow: 0 5px 20px hsla(180, 100%, 40%, 0.25),
       0 5px 50px hsla(180, 100%, 40%, 0.4);
   }
+`;
+
+const arrowAnimation = keyframes`
+0%{
+  opacity: 0;
+  transform: translateY(-10%);
+}
+45%{
+  opacity: 1;
+  transform: translateY(20%);
+}
+90%, 100%{
+  opacity: 0;
+  transform: translateY(60%);
+}
+`;
+
+export const Arrow = styled.div`
+  position: absolute;
+  top: 100%;
+  height: 100%;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(p) => p.theme.text.secondary};
+  animation: ${arrowAnimation} 2s linear infinite;
+  animation-delay: 1s;
 `;

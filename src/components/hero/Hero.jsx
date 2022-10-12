@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, CTA, Heading, Logo } from "./Hero.styles";
+import { Container, CTA, Heading, Logo, Arrow } from "./Hero.styles";
 import { HiChevronDoubleDown as ArrowDown } from "react-icons/hi";
 const Hero = () => {
   return (
@@ -8,6 +8,9 @@ const Hero = () => {
       <Heading>A World of Quizzes</Heading>
       <CTA href="#topics" title="start now">
         Start Now
+        <Arrow>
+          <ArrowDown />
+        </Arrow>
       </CTA>
     </Container>
   );
