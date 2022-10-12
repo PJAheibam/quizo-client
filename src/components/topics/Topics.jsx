@@ -1,5 +1,4 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import {
   Wrapper,
   ThumbnailContainer,
@@ -11,11 +10,9 @@ import {
   Container,
 } from "./Topics.styles";
 
-const Topics = () => {
-  const topics = useLoaderData();
-
+const Topics = ({ topics }) => {
   return (
-    <Wrapper>
+    <Wrapper id="topics">
       {topics.map((topic) => (
         <Container key={topic.id}>
           <ThumbnailContainer>

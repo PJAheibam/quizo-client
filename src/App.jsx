@@ -8,6 +8,7 @@ import Quiz from "./components/quiz/Quiz";
 import Statistics from "./components/statistics/Statistics";
 import Blog from "./components/blog/Blog";
 import Topics from "./components/topics/Topics";
+import Home from "./layouts/Home";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,7 +18,7 @@ function App() {
       children: [
         {
           path: "",
-          element: <Topics />,
+          element: <Home />,
           loader: getTopics,
         },
         {

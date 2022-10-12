@@ -3,10 +3,10 @@ import { WrapperStyles } from "../../styles/Wrapper";
 import { Link } from "react-router-dom";
 import { device } from "../../utils/device";
 
-export const Wrapper = styled.main`
+export const Wrapper = styled.article`
   ${WrapperStyles};
-  margin-top: 100px;
   padding-block: 1.5rem;
+  scroll-margin-top: 92px;
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
