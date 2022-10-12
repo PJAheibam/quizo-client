@@ -5,7 +5,6 @@ import QuizBlock from "./block/Block";
 import Aside from "./aside/Aside";
 import { ToastContainer, toast } from "react-toastify";
 import ResultProvider from "../../context/ResultContext";
-import { RiCloseCircleFill as CloseIcon } from "react-icons/ri";
 
 const Quiz = () => {
   const data = useLoaderData();
@@ -21,6 +20,9 @@ const Quiz = () => {
       });
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <ResultProvider>
