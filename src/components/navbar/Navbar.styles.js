@@ -47,6 +47,7 @@ export const Links = styled.nav`
   overflow: hidden;
   transition: max-height 500ms ease-out;
   @media ${device.md} {
+    overflow: visible;
     position: relative;
     max-height: 500px;
     flex-direction: row;
@@ -57,10 +58,10 @@ export const Links = styled.nav`
 `;
 
 export const Link = styled(NavLink)`
+  position: relative;
   text-transform: uppercase;
-  /* color: ${(p) => p.theme.text.secondary}; */
   color: ${(p) =>
-    p.isactive ? p.theme.palette.secondary.active : p.theme.text.secondary};
+    p.isactive ? p.theme.palette.warning.active : p.theme.text.secondary};
   cursor: pointer;
   text-decoration: none;
   font-size: 1.25rem;
@@ -79,7 +80,22 @@ export const Link = styled(NavLink)`
   }
   &:hover {
     color: ${(p) =>
-      p.isactive ? p.theme.palette.secondary.active : p.theme.text.hovered};
+      p.isactive ? p.theme.palette.warning.active : p.theme.text.hovered};
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    top: 110%;
+    left: 50%;
+    width: 50%;
+    height: 3px;
+    border-radius: 5px;
+    transform: translate(-50%, 0%) scaleX(${(p) => (p.isactive ? 1 : 0)});
+    opacity: ${(p) => (p.isactive ? 1 : 0)};
+    transform-origin: center center;
+    /* background-color: red; */
+    background-color: ${(p) => p.theme.palette.warning.active};
+    transition: transform 350ms ease, opacity 300ms ease;
   }
 `;
 
