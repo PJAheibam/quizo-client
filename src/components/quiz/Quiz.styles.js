@@ -19,6 +19,7 @@ export const Container = styled.article`
 `;
 
 export const QuizSection = styled.section`
+  flex-basis: 70%;
   display: flex;
   flex-direction: column;
   gap: 2rem;

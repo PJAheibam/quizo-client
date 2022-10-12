@@ -31,7 +31,7 @@ export const AsideWrapper = styled.article`
 `;
 export const Container = styled.aside`
   position: relative;
-  flex-basis: 50%;
+  flex-basis: 30%;
 `;
 
 export const ThumbnailContainer = styled.figure`
