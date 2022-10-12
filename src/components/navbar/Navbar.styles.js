@@ -103,8 +103,15 @@ export const Link = styled(NavLink)`
     opacity: ${(p) => (p.isactive ? 1 : 0)};
     transform-origin: center center;
     /* background-color: red; */
-    background-color: ${(p) => p.theme.palette.warning.active};
-    transition: transform 350ms ease, opacity 300ms ease;
+    background-color: ${(p) =>
+      p.isactive ? p.theme.palette.warning.active : "transparent"};
+    transition: transform 350ms ease, opacity 300ms ease,
+      background-color 300ms ease-out;
+  }
+  &:hover::after {
+    opacity: 1;
+    background-color: ${(p) => p.theme.text.disabled};
+    transform: translate(-50%, 0%) scaleX(1);
   }
 `;
 

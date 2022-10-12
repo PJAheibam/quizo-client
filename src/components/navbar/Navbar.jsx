@@ -14,10 +14,13 @@ import { useLocation } from "react-router-dom";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+    window.scrollTo(0, 0);
+  };
   return (
     <Wrapper>
-      <LogoContainer to="/" onClick={() => setOpen(false)}>
+      <LogoContainer to="/" onClick={handleClick}>
         <Logo />
       </LogoContainer>
       <ToggleButton onClick={() => setOpen((prev) => !prev)} open={open}>
@@ -30,21 +33,21 @@ const Navbar = () => {
           isactive={
             pathname === "/" || pathname.includes("/quiz/") ? "true" : undefined
           }
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={handleClick}
         >
           Topics
         </Link>
         <Link
           to="/statistics"
           isactive={pathname === "/statistics" ? "true" : undefined}
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={handleClick}
         >
           Statistics
         </Link>
         <Link
           to="/blog"
           isactive={pathname === "/blog" ? "true" : undefined}
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={handleClick}
         >
           Blog
         </Link>
