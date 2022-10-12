@@ -1,11 +1,11 @@
 import styled, { keyframes } from "styled-components";
 import logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
+import { device } from "../../utils/device";
 
 export const Container = styled.section`
   position: relative;
-  min-height: 500px;
-  height: calc(100vh - 92px);
+  min-height: calc(100vh - 92px);
   background-image: linear-gradient(
     -45deg,
     hsl(272, 40%, 25%),
@@ -37,6 +37,12 @@ export const Container = styled.section`
     left: 100%;
     background-color: hsla(52, 90%, 50%, 0.75);
   }
+  @media ${device.md} {
+    min-height: 500px;
+  }
+  @media ${device.lg} {
+    height: calc(100vh - 92px);
+  }
 `;
 
 export const Logo = styled.img.attrs((p) => ({
@@ -50,8 +56,9 @@ export const Heading = styled.h1`
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 1px;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding-inline: max(1.5rem, calc(100vw - 1280px));
+  text-align: center;
+  margin-block: 2.5rem;
   background-image: linear-gradient(-45deg, #f9d423, #ff4350);
   background-clip: text;
   -webkit-background-clip: text;
@@ -83,32 +90,40 @@ export const CTA = styled.a`
     box-shadow: 0 5px 20px hsla(180, 100%, 40%, 0.25),
       0 5px 50px hsla(180, 100%, 40%, 0.4);
   }
+  @media ${device.md} {
+    display: none;
+  }
+  @media ${device.lg} {
+    display: block;
+  }
 `;
 
 const arrowAnimation = keyframes`
 0%{
   opacity: 0;
-  transform: translateY(-10%);
+  transform: translate(-50%,-10%);
 }
 45%{
   opacity: 1;
-  transform: translateY(20%);
+  transform: translate(-50%,20%);
 }
 90%, 100%{
   opacity: 0;
-  transform: translateY(60%);
+  transform: translate(-50%,60%);
 }
 `;
 
 export const Arrow = styled.div`
   position: absolute;
   top: 100%;
+  left: 50%;
   height: 100%;
   width: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: ${(p) => p.theme.text.secondary};
+  transform: translateX(-50%);
   animation: ${arrowAnimation} 2s linear infinite;
   animation-delay: 1s;
 `;

@@ -44,7 +44,7 @@ export const dark = {
       disabled: "rgba(255,255,255,0.1)",
     },
     warning: {
-      active: "hsla42, 100%, 50%)",
+      active: "hsl(42, 100%, 50%)",
       bg: "hsla(42, 100%, 50%, 0.25)",
       hovered: "hsla(42, 100%, 50%, 0.45)",
       disabled: "hsla(42, 100%, 50%, 0.1)",

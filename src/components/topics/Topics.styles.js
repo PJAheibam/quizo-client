@@ -13,12 +13,13 @@ export const Wrapper = styled.article`
   gap: 2rem;
   @media ${device.md} {
     display: grid;
-    align-items: center;
-    min-height: calc(100vh - 92px);
+    min-height: auto;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 1fr;
   }
   @media ${device.lg} {
+    align-items: center;
+    min-height: calc(100vh - 92px);
     grid-template-columns: repeat(4, 1fr);
   }
 `;
@@ -84,9 +85,20 @@ export const LinkButton = styled(Link)`
   padding: 0.25em 0.5em;
   margin-top: 1rem;
   border-radius: 0.2em;
-  background-color: ${(p) => p.theme.palette.secondary.bg};
+  background-image: linear-gradient(-45deg, #f5af19, #f12711);
+  background-size: 200%;
+  background-position: left;
   color: ${(p) => p.theme.text.primary};
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  /* text-transform: uppercase; */
+  transition: background 500ms ease;
+  &:hover {
+    background-position: right;
+  }
 `;
 
 export const Content = styled.div`
