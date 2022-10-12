@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { WrapperStyles } from "../../styles/Wrapper";
 import { Link as rLink, NavLink } from "react-router-dom";
 import { device } from "../../utils/device";
+import logo from "../../assets/img/logo.png";
 
 export const Wrapper = styled.header`
   ${WrapperStyles}
@@ -19,12 +20,16 @@ export const Wrapper = styled.header`
 
 export const LogoContainer = styled(rLink)`
   cursor: pointer;
+  height: fit-content;
+  display: flex;
   text-decoration: none;
   font-size: 3rem;
 `;
 
-export const Logo = styled.img`
-  height: 3rem;
+export const Logo = styled.img.attrs(() => ({
+  src: logo,
+}))`
+  height: 60px;
 `;
 
 export const Links = styled.nav`
