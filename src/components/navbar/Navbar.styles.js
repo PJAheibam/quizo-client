@@ -3,6 +3,7 @@ import { WrapperStyles } from "../../styles/Wrapper";
 import { Link as rLink, NavLink } from "react-router-dom";
 import { device } from "../../utils/device";
 import logo from "../../assets/img/logo.png";
+import { FocusStyle } from "../../styles/FocusStyle";
 
 export const Wrapper = styled.header`
   ${WrapperStyles}
@@ -24,6 +25,10 @@ export const LogoContainer = styled(rLink)`
   display: flex;
   text-decoration: none;
   font-size: 3rem;
+  &:focus-visible {
+    border-radius: 0.01rem;
+    ${FocusStyle};
+  }
 `;
 
 export const Logo = styled.img.attrs(() => ({
@@ -77,6 +82,10 @@ export const Link = styled(NavLink)`
     @media ${device.md} {
       margin: 0;
     }
+  }
+  &:focus-visible {
+    ${FocusStyle};
+    border-radius: 0.05px;
   }
   &:hover {
     color: ${(p) =>

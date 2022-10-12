@@ -48,9 +48,9 @@ const Aside = ({ data }) => {
             <Foo>Wrong Guessed</Foo>
           </Block>
         </Content>
-        <CheckAllBtn onClick={checkAllResult}>
+        {/* <CheckAllBtn onClick={checkAllResult}>
           See All Result <ArrowRight />{" "}
-        </CheckAllBtn>
+        </CheckAllBtn> */}
       </AsideWrapper>
     </Container>
   );

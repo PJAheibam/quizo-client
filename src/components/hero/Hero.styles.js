@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 import logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
 import { device } from "../../utils/device";
+import { FocusStyle } from "../../styles/FocusStyle";
 
 export const Container = styled.section`
   position: relative;
@@ -89,6 +90,9 @@ export const CTA = styled.a`
     background-position: left;
     box-shadow: 0 5px 20px hsla(180, 100%, 40%, 0.25),
       0 5px 50px hsla(180, 100%, 40%, 0.4);
+  }
+  &:focus-visible {
+    ${FocusStyle};
   }
   @media ${device.md} {
     display: none;

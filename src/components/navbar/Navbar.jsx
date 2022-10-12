@@ -27,7 +27,9 @@ const Navbar = () => {
         <Link
           end
           to="/"
-          isactive={pathname === "/" ? "true" : undefined}
+          isactive={
+            pathname === "/" || pathname.includes("/quiz/") ? "true" : undefined
+          }
           onClick={() => setOpen((prev) => !prev)}
         >
           Topics

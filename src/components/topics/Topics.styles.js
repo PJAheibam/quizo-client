@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { WrapperStyles } from "../../styles/Wrapper";
 import { Link } from "react-router-dom";
 import { device } from "../../utils/device";
+import { FocusStyle } from "../../styles/FocusStyle";
 
 export const Wrapper = styled.article`
   ${WrapperStyles};
@@ -98,6 +99,9 @@ export const LinkButton = styled(Link)`
   transition: background 500ms ease;
   &:hover {
     background-position: right;
+  }
+  &:focus-visible {
+    ${FocusStyle};
   }
 `;
 
