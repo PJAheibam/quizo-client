@@ -156,6 +156,9 @@ export const Option = styled.label`
     }
   }}
   transition: border 350ms ease, background-color 350ms ease;
+  &:hover {
+    border: 2px solid ${(p) => p.theme.text.disabled};
+  }
   &:hover ${BulletPoint} {
     border: 1px solid ${(p) => p.theme.text.primary};
   }

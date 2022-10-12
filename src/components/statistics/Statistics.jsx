@@ -49,7 +49,7 @@ const Statistics = () => {
             <Legend />
             <Bar dataKey="correctGuessed" fill="#82ca9d" />
             <Bar dataKey="total" fill="#8884d8" />
-            <Bar dataKey="wrongGuessed" fill="#ff6d53" />
+            <Bar dataKey="wrongGuessed" fill={theme.palette.error.active} />
           </BarChart>
         </ResponsiveContainer>
         <FooterText>Result Analytics</FooterText>
