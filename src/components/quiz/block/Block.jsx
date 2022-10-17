@@ -17,15 +17,16 @@ import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
 import { useUpdateResult, useResult } from "../../../context/ResultContext";
+import { updateQuizData } from "../../../utils/local-storage-helper";
 
 const QuizBlock = ({ data, index, notify }) => {
+  const updateResult = useUpdateResult();
+  const result = useResult();
+  const { id: quizID } = useParams();
   const { props } = parse(data.question);
   const ques = props?.children;
   const [selected, setSelected] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [allowInput, setAllowInput] = useState(true);
-  const updateResult = useUpdateResult();
-  const result = useResult();
 
   function checkAns(index) {
     if (data.correctAnswer === data.options[index]) return "right";
@@ -33,40 +34,46 @@ const QuizBlock = ({ data, index, notify }) => {
   }
 
   const handleClick = (index) => {
-    if (allowInput) {
+    if (!showAnswer) {
       setSelected(index);
-      const newData = result.map((q) => {
-        if (q.questionID === data.id)
-          return {
-            questionID: data.id,
-            guessed: checkAns(index),
-          };
-        else return q;
-      });
-      notify(checkAns(index));
-      updateResult(newData);
     }
   };
 
   const checkResult = () => {
+    if (selected !== null) {
+      const newData = result.map((q) => {
+        if (q.questionID === data.id)
+          return {
+            questionID: data.id,
+            guessed: checkAns(selected),
+            guessedIndex: selected,
+          };
+        else return q;
+      });
+      const updateData = {
+        ...result,
+        [data.id]: { guessed: checkAns(selected), guessedIndex: selected },
+      };
+      updateQuizData(quizID, updateData);
+      updateResult(newData);
+      notify(checkAns(index));
+    }
     setShowAnswer((prev) => !prev);
-    setAllowInput((prev) => !prev);
-    // if (data.correctAnswer === data.options[selected]) {
-    //   updateResult(resultType.CORRECT_GUESSED);
-    // } else {
-    //   if (selected !== null) updateResult(resultType.WRONG_GUESSED);
-    // }
   };
-
+  useEffect(() => {
+    console.log("selected: ", selected);
+  }, [selected]);
   return (
     <Container>
       <QuestionHeader>
         <HeaderText>Question {++index}</HeaderText>
         <CheckAnsBtn
-          title={showAnswer ? "Hide Answer" : "Show Answer"}
+          title="show answer"
+          disabled={selected === null ? true : undefined}
+          hide={showAnswer}
           onClick={checkResult}
         >
-          {showAnswer ? <ImEyeBlocked /> : <ImEye />}
+          {selected === null ? <ImEyeBlocked /> : <ImEye />}
         </CheckAnsBtn>
       </QuestionHeader>
       <QuestionBody>

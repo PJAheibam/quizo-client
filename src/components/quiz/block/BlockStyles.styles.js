@@ -53,7 +53,7 @@ export const HeaderText = styled.h1`
 `;
 
 export const CheckAnsBtn = styled.button`
-  cursor: pointer;
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "default")};
   pointer-events: ${(p) => (p.hide ? "none" : "auto")};
   will-change: color;
   background-color: transparent;
@@ -77,7 +77,7 @@ export const CheckAnsBtn = styled.button`
 `;
 
 export const Options = styled.div`
-  pointer-events: ${(p) => (p.showresult ? "none" : "initial")};
+  pointer-events: ${(p) => (p.showresult ? "none" : "auto")};
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -147,14 +147,14 @@ export const Option = styled.label`
   border: 2px solid ${(p) => p.theme.paper.light};
   gap: 1rem;
   ${(p) => {
-    if (p.checked) {
-      if (p.iscorrect) {
-        return correctStyles;
+    if (p.showresult) {
+      if (p.checked) {
+        if (p.iscorrect) {
+          return correctStyles;
+        } else {
+          return errorStyles;
+        }
       } else {
-        return errorStyles;
-      }
-    } else {
-      if (p.showresult) {
         if (p.iscorrect) {
           return correctStyles;
         }

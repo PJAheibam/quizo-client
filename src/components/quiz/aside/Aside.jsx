@@ -13,8 +13,11 @@ import {
   CheckAllBtn,
 } from "./Aside.styles";
 import { HiArrowRight as ArrowRight } from "react-icons/hi";
+import { useParams } from "react-router-dom";
+import { getQuizData } from "../../../utils/local-storage-helper";
 
 const Aside = ({ data }) => {
+  const { id: quizID } = useParams();
   const result = useResult();
   const updateResult = useUpdateResult();
   const guessed = result.reduce(
@@ -36,7 +39,10 @@ const Aside = ({ data }) => {
     const res = data.questions.map((question) => ({
       questionID: question.id,
       guessed: "not-guessed",
+      guessedIndex: null,
     }));
+    const localData = getQuizData(quizID);
+    console.log("local data:", localData);
     updateResult(res);
   }, []);
   return (
