@@ -16,16 +16,24 @@ import parse from "html-react-parser";
 import { ImEye, ImEyeBlocked } from "react-icons/im";
 import { MdClose as Cross } from "react-icons/md";
 import { BsCheck as Tick } from "react-icons/bs";
-import { useUpdateResult, useResult } from "../../../context/ResultContext";
-import { updateQuizData } from "../../../utils/local-storage-helper";
+import {
+  useUpdateResult,
+  useResult,
+  useCheckAll,
+} from "../../../context/ResultContext";
+import {
+  getQuizData,
+  updateQuizData,
+} from "../../../utils/local-storage-helper";
 
 const QuizBlock = ({ data, index, notify }) => {
   const updateResult = useUpdateResult();
   const result = useResult();
+  const [checkAllAns] = useCheckAll();
+  const [selected, setSelected] = useState(null);
   const { id: quizID } = useParams();
   const { props } = parse(data.question);
   const ques = props?.children;
-  const [selected, setSelected] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
   function checkAns(index) {
@@ -39,30 +47,34 @@ const QuizBlock = ({ data, index, notify }) => {
     }
   };
 
-  const checkResult = () => {
+  const checkResult = (callBackFunc) => {
     if (selected !== null) {
-      const newData = result.map((q) => {
-        if (q.questionID === data.id)
-          return {
-            questionID: data.id,
-            guessed: checkAns(selected),
-            guessedIndex: selected,
-          };
-        else return q;
-      });
       const updateData = {
         ...result,
         [data.id]: { guessed: checkAns(selected), guessedIndex: selected },
       };
       updateQuizData(quizID, updateData);
-      updateResult(newData);
-      notify(checkAns(index));
+      updateResult(updateData);
+      setShowAnswer((prev) => !prev);
+      if (typeof callBackFunc === "function") callBackFunc();
+    } else {
+      console.warn("Give all the ans first!");
     }
-    setShowAnswer((prev) => !prev);
   };
+
   useEffect(() => {
-    console.log("selected: ", selected);
-  }, [selected]);
+    if (result[data.id]) {
+      setSelected(result[data.id].guessedIndex);
+      if (result[data.id].guessedIndex !== null) setShowAnswer(true);
+    }
+  }, [result[data.id]]);
+  useEffect(() => {
+    if (checkAllAns) {
+      console.log("check all result clicked!");
+      checkResult();
+    }
+  }, [checkAllAns]);
+
   return (
     <Container>
       <QuestionHeader>
@@ -71,7 +83,7 @@ const QuizBlock = ({ data, index, notify }) => {
           title="show answer"
           disabled={selected === null ? true : undefined}
           hide={showAnswer}
-          onClick={checkResult}
+          onClick={() => checkResult(notify(checkAns(selected)))}
         >
           {selected === null ? <ImEyeBlocked /> : <ImEye />}
         </CheckAnsBtn>

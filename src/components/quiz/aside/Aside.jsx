@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { useResult, useUpdateResult } from "../../../context/ResultContext";
+import {
+  useCheckAll,
+  useResult,
+  useUpdateResult,
+} from "../../../context/ResultContext";
 import {
   AsideWrapper,
   Container,
@@ -16,34 +20,44 @@ import { HiArrowRight as ArrowRight } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { getQuizData } from "../../../utils/local-storage-helper";
 
+const calculateGuessed = (data) => {
+  let newGuessed = {
+    correct: 0,
+    wrong: 0,
+  };
+
+  for (const questionID in data) {
+    if (data[questionID].guessed === "right") {
+      newGuessed.correct++;
+    } else if (data[questionID].guessed === "wrong") {
+      newGuessed.wrong++;
+    }
+  }
+  console.log(newGuessed);
+  return newGuessed;
+};
+
 const Aside = ({ data }) => {
   const { id: quizID } = useParams();
   const result = useResult();
   const updateResult = useUpdateResult();
-  const guessed = result.reduce(
-    (prevValue, currentValue) => {
-      if (currentValue.guessed === "right") {
-        return { ...prevValue, correct: prevValue.correct + 1 };
-      } else if (currentValue.guessed === "wrong") {
-        return { ...prevValue, wrong: prevValue.wrong + 1 };
-      } else return prevValue;
-    },
-    { correct: 0, wrong: 0 }
-  );
+  const guessed = calculateGuessed(result);
+  const [checkAllAns, setCheckAllAns] = useCheckAll();
   // console.info(guessed);
   const checkAllResult = () => {
-    // console.log(guessed);
-    console.log(result);
+    setCheckAllAns(true);
   };
+
   useEffect(() => {
-    const res = data.questions.map((question) => ({
-      questionID: question.id,
-      guessed: "not-guessed",
-      guessedIndex: null,
-    }));
-    const localData = getQuizData(quizID);
-    console.log("local data:", localData);
-    updateResult(res);
+    let localData = getQuizData(quizID);
+    if (!localData) {
+      localData = {};
+      const { questions } = data;
+      for (const question of questions) {
+        localData[question.id] = { guessed: "not-guessed", guessedIndex: null };
+      }
+    }
+    localData && updateResult(localData);
   }, []);
   return (
     <Container>
@@ -66,9 +80,9 @@ const Aside = ({ data }) => {
             <Foo>Wrong Guessed</Foo>
           </Block>
         </Content>
-        {/* <CheckAllBtn onClick={checkAllResult}>
+        <CheckAllBtn onClick={checkAllResult}>
           See All Result <ArrowRight />{" "}
-        </CheckAllBtn> */}
+        </CheckAllBtn>
       </AsideWrapper>
     </Container>
   );
