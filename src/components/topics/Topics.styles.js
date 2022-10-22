@@ -10,6 +10,7 @@ export const Wrapper = styled.article`
   scroll-margin-top: 92px;
   min-height: calc(100vh - 92px);
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 2rem;
   @media ${device.md} {
