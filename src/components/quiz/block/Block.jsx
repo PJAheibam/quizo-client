@@ -37,14 +37,6 @@ const QuizBlock = ({ data, index, notify, localQuesData }) => {
   const ques = props?.children;
   const [showAnswer, setShowAnswer] = useState(showAllAnswer);
 
-  if (result[data.id] !== undefined) {
-    if (result[data.id].guessed !== GUESSED_TYPE.NOT_GUESSED) {
-      // setSelected(result[data.id].guessedIndex);
-      // setShowAnswer(true);
-      console.log(`Quiz-${index}: show answer`);
-    }
-  }
-
   function checkAns(index) {
     if (data.correctAnswer === data.options[index]) return "right";
     else return "wrong";
@@ -88,7 +80,6 @@ const QuizBlock = ({ data, index, notify, localQuesData }) => {
       if (result[data.id].guessed !== GUESSED_TYPE.NOT_GUESSED) {
         setSelected(result[data.id].guessedIndex);
         setShowAnswer(true);
-        console.log(`Quiz-${index}: show answer`);
       }
     }
   }, [showAllAnswer]);

@@ -6,11 +6,11 @@ import Aside from "./aside/Aside";
 import { ToastContainer, toast } from "react-toastify";
 import ResultProvider from "../../context/ResultContext";
 import { getQuizData } from "../../utils/local-storage-helper";
+import PageNotFound from "../404-page";
 
 const Quiz = () => {
   const data = useLoaderData();
   const localData = getQuizData(data.id);
-  // console.log(localData[data.id]);
   const notify = (type) => {
     if (type === "right") {
       toast.success("Correct!", {
@@ -30,6 +30,9 @@ const Quiz = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  if (JSON.stringify(data) === "{}") {
+    return <PageNotFound />;
+  }
   return (
     <>
       <ResultProvider>
@@ -49,7 +52,7 @@ const Quiz = () => {
           <Container>
             <Aside data={data} />
             <QuizSection>
-              {data.questions.map((question, i) => (
+              {data?.questions.map((question, i) => (
                 <QuizBlock
                   notify={notify}
                   data={question}

@@ -27,7 +27,7 @@ export const Wrapper = styled.article`
 
 export const Container = styled.section`
   width: 100%;
-  height: fit-content;
+  height: 100%;
   background-color: ${(p) => p.theme.paper.dark};
   border-radius: 0.5rem;
   display: flex;
