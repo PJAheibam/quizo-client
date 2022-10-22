@@ -25,6 +25,8 @@ const radioErrorStyles = css`
 
 export const Container = styled.div`
   border-radius: 5px;
+  /* scroll-margin-top: 302px; */
+  scroll-padding-top: -200px;
   background-color: ${(p) => p.theme.paper.dark};
   overflow: hidden;
 `;
@@ -53,7 +55,7 @@ export const HeaderText = styled.h1`
 `;
 
 export const CheckAnsBtn = styled.button`
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "default")};
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
   pointer-events: ${(p) => (p.hide ? "none" : "auto")};
   will-change: color;
   background-color: transparent;

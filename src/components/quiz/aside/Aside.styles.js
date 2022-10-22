@@ -8,6 +8,7 @@ export const AsideWrapper = styled.article`
   @media ${device.lg} {
     position: sticky;
     top: 125px;
+    overscroll-behavior: contain;
     height: calc(100vh - 125px);
     overflow-y: auto;
   }

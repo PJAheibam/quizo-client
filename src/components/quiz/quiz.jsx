@@ -5,12 +5,19 @@ import QuizBlock from "./block/Block";
 import Aside from "./aside/Aside";
 import { ToastContainer, toast } from "react-toastify";
 import ResultProvider from "../../context/ResultContext";
+import { getQuizData } from "../../utils/local-storage-helper";
 
 const Quiz = () => {
   const data = useLoaderData();
+  const localData = getQuizData(data.id);
+  // console.log(localData[data.id]);
   const notify = (type) => {
     if (type === "right") {
       toast.success("Correct!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else if (type === "") {
+      toast.warn("Give all answer!", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
@@ -28,7 +35,7 @@ const Quiz = () => {
       <ResultProvider>
         <ToastContainer
           position="top-center"
-          autoClose={5000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -42,8 +49,14 @@ const Quiz = () => {
           <Container>
             <Aside data={data} />
             <QuizSection>
-              {data.questions.map((data, i) => (
-                <QuizBlock notify={notify} data={data} key={i} index={i} />
+              {data.questions.map((question, i) => (
+                <QuizBlock
+                  notify={notify}
+                  data={question}
+                  key={i}
+                  index={i}
+                  localQuesData={localData ? localData[question.id] : null}
+                />
               ))}
             </QuizSection>
           </Container>

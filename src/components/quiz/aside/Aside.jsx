@@ -33,7 +33,6 @@ const calculateGuessed = (data) => {
       newGuessed.wrong++;
     }
   }
-  console.log(newGuessed);
   return newGuessed;
 };
 
@@ -42,10 +41,9 @@ const Aside = ({ data }) => {
   const result = useResult();
   const updateResult = useUpdateResult();
   const guessed = calculateGuessed(result);
-  const [checkAllAns, setCheckAllAns] = useCheckAll();
-  // console.info(guessed);
+  const { checkAllAns } = useCheckAll();
   const checkAllResult = () => {
-    setCheckAllAns(true);
+    checkAllAns(data.id, data?.questions);
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Container,
@@ -20,21 +20,30 @@ import {
   useUpdateResult,
   useResult,
   useCheckAll,
+  GUESSED_TYPE,
 } from "../../../context/ResultContext";
-import {
-  getQuizData,
-  updateQuizData,
-} from "../../../utils/local-storage-helper";
+import { updateQuizData } from "../../../utils/local-storage-helper";
+import { toast } from "react-toastify";
 
-const QuizBlock = ({ data, index, notify }) => {
+const QuizBlock = ({ data, index, notify, localQuesData }) => {
   const updateResult = useUpdateResult();
+  const containerRef = useRef();
   const result = useResult();
-  const [checkAllAns] = useCheckAll();
+  const { focusIndex, checkAllAns, setFocusIndex, showAllAnswer } =
+    useCheckAll();
   const [selected, setSelected] = useState(null);
   const { id: quizID } = useParams();
   const { props } = parse(data.question);
   const ques = props?.children;
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(showAllAnswer);
+
+  if (result[data.id] !== undefined) {
+    if (result[data.id].guessed !== GUESSED_TYPE.NOT_GUESSED) {
+      // setSelected(result[data.id].guessedIndex);
+      // setShowAnswer(true);
+      console.log(`Quiz-${index}: show answer`);
+    }
+  }
 
   function checkAns(index) {
     if (data.correctAnswer === data.options[index]) return "right";
@@ -44,6 +53,11 @@ const QuizBlock = ({ data, index, notify }) => {
   const handleClick = (index) => {
     if (!showAnswer) {
       setSelected(index);
+      const updatedResult = {
+        ...result,
+        [data.id]: { guessed: "not-guessed", guessedIndex: index },
+      };
+      updateResult(updatedResult);
     }
   };
 
@@ -63,20 +77,46 @@ const QuizBlock = ({ data, index, notify }) => {
   };
 
   useEffect(() => {
-    if (result[data.id]) {
-      setSelected(result[data.id].guessedIndex);
-      if (result[data.id].guessedIndex !== null) setShowAnswer(true);
+    if (localQuesData) {
+      setSelected(localQuesData.guessedIndex);
+      if (localQuesData.guessedIndex !== null) setShowAnswer(true);
     }
-  }, [result[data.id]]);
+  }, [localQuesData]);
+
   useEffect(() => {
-    if (checkAllAns) {
-      console.log("check all result clicked!");
-      checkResult();
+    if (result[data.id] !== undefined) {
+      if (result[data.id].guessed !== GUESSED_TYPE.NOT_GUESSED) {
+        setSelected(result[data.id].guessedIndex);
+        setShowAnswer(true);
+        console.log(`Quiz-${index}: show answer`);
+      }
     }
+  }, [showAllAnswer]);
+
+  useEffect(() => {
+    const element = containerRef.current;
+
+    const removeInterval = setInterval(() => {
+      element.classList.remove("flash");
+    }, 3000);
+    if (focusIndex !== null && index === focusIndex + 1) {
+      element.classList.remove("flash");
+      containerRef.current.scrollIntoView();
+      const y = containerRef.current.offsetTop - 124;
+      containerRef.current.classList.add("flash");
+      window.scrollTo(0, y);
+      toast.warn(`Select question ${index} answer!`, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setFocusIndex(null);
+    }
+    return () => {
+      clearInterval(removeInterval);
+    };
   }, [checkAllAns]);
 
   return (
-    <Container>
+    <Container ref={containerRef}>
       <QuestionHeader>
         <HeaderText>Question {++index}</HeaderText>
         <CheckAnsBtn
