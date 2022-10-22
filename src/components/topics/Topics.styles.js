@@ -34,6 +34,7 @@ export const Container = styled.section`
   align-items: center;
   gap: 1.5rem;
   @media ${device.lg} {
+    height: fit-content;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
